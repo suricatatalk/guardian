@@ -14,7 +14,7 @@ import (
 	log "github.com/Sirupsen/logrus"
 	"github.com/nats-io/nats"
 	"github.com/sebest/logrusly"
-	"github.com/sohlich/natsproxy"
+	"github.com/sohlich/nats-proxy"
 	"github.com/suricatatalk/guardian/auth"
 	"github.com/suricatatalk/mail/client"
 
