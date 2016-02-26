@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
-	"regexp"
 	"syscall"
 	"text/template"
 
@@ -34,12 +33,9 @@ const (
 )
 
 var (
-	ErrNoServiceInUrl          = errors.New("No service definition in url")
 	ErrInavelidActivationToken = errors.New("Invalid activation token")
 	authProvider               auth.AuthProvider
 	passManager                auth.PasswordManager
-	actiavteUserRegex          = regexp.MustCompile(".*\\/activate\\/")
-	passwordResetRegex         = regexp.MustCompile(".*\\/resetpassword\\/")
 	appCfg                     *AppConfig
 )
 
