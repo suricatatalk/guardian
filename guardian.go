@@ -186,7 +186,7 @@ func loginHandler(c *natsproxy.Context) {
 		return
 	}
 
-	c.Response.Header.Set(TokenHeader, string(marshUser))
+	c.Response.GetHeader().Set(TokenHeader, string(marshUser))
 }
 
 func registerHandler(c *natsproxy.Context) {
@@ -227,7 +227,7 @@ func activateHandler(c *natsproxy.Context) {
 
 func requestPasswordResetHandler(c *natsproxy.Context) {
 	log.Println("Request password reset")
-	email := c.Request.Form.Get("email")
+	email := c.FormVariable("email")
 	if len(email) == 0 {
 		log.Infoln("Parameter \"email\" not found")
 		c.JSON(http.StatusNotFound, "email param not found")
@@ -250,7 +250,7 @@ func requestPasswordResetHandler(c *natsproxy.Context) {
 
 func passwordResetHandler(c *natsproxy.Context) {
 	tkn := c.PathVariable("resettoken")
-	pass := c.Request.Form.Get("password")
+	pass := c.FormVariable("password")
 	err := passManager.ResetPasswordBy(tkn, pass)
 	if err == auth.ErrResetTokenExpired {
 		c.JSON(http.StatusForbidden, "Expired")
